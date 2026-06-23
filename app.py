@@ -55,3 +55,5 @@ def predecir(img):
 
 modelo = cargar_modelo()
 clases = cargar_clases()
+
+archivo = st.file_uploader("Seleccione una imagen", type=["jpg", "jpeg", "png"])

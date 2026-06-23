@@ -38,3 +38,9 @@ def cargar_clases():
         with open(CLASS_PATH, "r", encoding="utf-8") as f:
             return json.load(f)
     return ["cardboard", "glass", "metal", "paper", "plastic", "trash"]
+
+def preparar_imagen(img):
+    img = img.convert("RGB").resize(IMG_SIZE)
+    arr = np.array(img, dtype=np.float32)
+    arr = tf.keras.applications.mobilenet_v2.preprocess_input(arr)
+    return np.expand_dims(arr, axis=0)

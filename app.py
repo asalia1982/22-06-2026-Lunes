@@ -31,3 +31,10 @@ def cargar_modelo():
             return tf.keras.models.load_model(path, compile=False)
     st.error("No se encontró el modelo. Coloque la carpeta modelo_reciclaje_mobilenet junto a app.py.")
     st.stop()
+
+@st.cache_data
+def cargar_clases():
+    if CLASS_PATH.exists():
+        with open(CLASS_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return ["cardboard", "glass", "metal", "paper", "plastic", "trash"]

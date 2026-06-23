@@ -44,3 +44,14 @@ def preparar_imagen(img):
     arr = np.array(img, dtype=np.float32)
     arr = tf.keras.applications.mobilenet_v2.preprocess_input(arr)
     return np.expand_dims(arr, axis=0)
+
+def predecir(img):
+    preds = modelo.predict(preparar_imagen(img), verbose=0)[0]
+    top3 = np.argsort(preds)[-3:][::-1]
+    return [
+        (LABELS_ES.get(clases[i], clases[i]), float(preds[i]) * 100)
+        for i in top3
+    ]
+
+modelo = cargar_modelo()
+clases = cargar_clases()
